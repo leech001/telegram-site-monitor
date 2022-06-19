@@ -5,4 +5,5 @@ services:
     build:
       context: .
     volumes:
-      - ./conf:/app/conf:ro
+      - ./app/conf:/app/conf:ro
+    

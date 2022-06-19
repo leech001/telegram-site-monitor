@@ -67,23 +67,20 @@ func main() {
 		go icmpChecker(bot, &config, host)
 	}
 
-	botUpdate(bot, config.Http.Sites, config.Icmp.Hosts)
+	botUpdate(bot, &config)
 }
 
 // Telegram bot for listening to incoming commands
-func botUpdate(bot *tgbotapi.BotAPI, sites []struct {
-	Url      string
-	Elements []string
-}, hosts []string) {
+func botUpdate(bot *tgbotapi.BotAPI, config *Config) {
 
 	// Create string for HTTP(s) monitoring sites
 	sitesString := ""
-	for _, site := range sites {
+	for _, site := range config.Http.Sites {
 		sitesString += site.Url + "\n"
 	}
 
 	// Create string for ICMP monitoring hosts
-	hostsString := strings.Join(hosts[:], "\n")
+	hostsString := strings.Join(config.Icmp.Hosts[:], "\n")
 
 	// Telegram bot listener
 	u := tgbotapi.NewUpdate(0)

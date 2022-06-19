@@ -42,7 +42,7 @@ func httpCheck(bot *tgbotapi.BotAPI, config *Config, site struct {
 				bot.Send(msg)
 				break
 			}
-			
+
 			// Check element on site (defacing)
 			for _, element := range site.Elements {
 				if !strings.Contains(body, element) {
@@ -59,6 +59,6 @@ func httpCheck(bot *tgbotapi.BotAPI, config *Config, site struct {
 			msg := tgbotapi.NewMessage(config.Telegram.Group, "Site "+site.Url+" HTTP get error")
 			bot.Send(msg)
 		}
-		time.Sleep(time.Duration(config.Telegram.Group) * time.Second)
+		time.Sleep(time.Duration(config.App.Update) * time.Second)
 	}
 }

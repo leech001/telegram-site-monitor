@@ -59,12 +59,12 @@ func main() {
 
 	// Running HTTP checker
 	for _, site := range config.Http.Sites {
-		go httpCheck(config.App.Update, bot, config.Telegram.Group, site, config.Http.Timeout, config.Http.Repeat)
+		go httpCheck(bot, &config, site)
 	}
 
 	// Running ICMP checker
 	for _, host := range config.Icmp.Hosts {
-		go icmpChecker(config.App.Update, bot, config.Telegram.Group, host, config.Icmp.Count, config.Icmp.Timeout, config.Icmp.Timedelay)
+		go icmpChecker(bot, &config, host)
 	}
 
 	botUpdate(bot, config.Http.Sites, config.Icmp.Hosts)
